@@ -5,19 +5,19 @@ LABEL maintainer="Gheonea Iulian <gheonea.iulian@gmail.com>"
 ENV BOT_USER="3000" \
     BOT_GROUP="3000" \
     BOT_DIR="/musicbot" \
-    BOT_DL_URL="https://github.com/treewords/MusicBot.git" \
+    BOT_DL_URL="https://github.com/treewords/MusicBot.git"
 	
 RUN groupadd -g "$SINUS_GROUP" musicbot && \
-    useradd -u "$BOT_USER" -g "$BOT_GROUP" -d "$BOT_DIR" musicbot && \	
+    useradd -u "$BOT_USER" -g "$BOT_GROUP" -d "$BOT_DIR" musicbot
     	
 # Install build tools
 RUN apt-get install build-essential unzip -y && \
-    apt-get install software-properties-common -y && \
+    apt-get install software-properties-common -y
 
 # Install system dependencies
 RUN apt-get update -y && \
     apt-get install git ffmpeg libopus-dev libffi-dev libsodium-dev python3-pip && \
-    apt-get upgrade -y apt-get -q upgrade -y && \
+    apt-get upgrade -y apt-get -q upgrade -y
 	
 # Clone the MusicBot to your home directory
 RUN mkdir -p "$BOT_DIR" && \
