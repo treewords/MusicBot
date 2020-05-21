@@ -1,37 +1,37 @@
-FROM alpine:edge
+FROM ubuntu:bionic
 
-# Add project source
-WORKDIR /usr/src/musicbot
-COPY . ./
+LABEL maintainer="Gheonea Iulian <gheonea.iulian@gmail.com>"
 
-# Install dependencies
-RUN apk update \
-&& apk add --no-cache \
-  ca-certificates \
-  ffmpeg \
-  opus \
-  python3 \
-  libsodium-dev \
-\
-# Install build dependencies
-&& apk add --no-cache --virtual .build-deps \
-  gcc \
-  git \
-  libffi-dev \
-  make \
-  musl-dev \
-  python3-dev \
-\
-# Install pip dependencies
-&& pip3 install --no-cache-dir -r requirements.txt \
-&& pip3 install --upgrade --force-reinstall --version websockets==4.0.1 \
-\
-# Clean up build dependencies
-&& apk del .build-deps
+ENV BOT_USER="3000" \
+    BOT_GROUP="3000" \
+    BOT_DIR="/musicbot" \
+	BOT_DL_URL="https://github.com/treewords/MusicBot.git" \
+	
+RUN groupadd -g "$SINUS_GROUP" musicbot && \
+    useradd -u "$BOT_USER" -g "$BOT_GROUP" -d "$BOT_DIR" musicbot && \	
+    	
+# Install build tools
+RUN apt-get install build-essential unzip -y && \
+    apt-get install software-properties-common -y && \
 
-# Create volume for mapping the config
-VOLUME /usr/src/musicbot/config
+# Install system dependencies
+RUN apt-get update -y && \
+    apt-get install git ffmpeg libopus-dev libffi-dev libsodium-dev python3-pip && \
+    apt-get upgrade -y apt-get -q upgrade -y && \
+	
+# Clone the MusicBot to your home directory
+RUN mkdir -p "$BOT_DIR" && \
+    git clone "$SBOT_DL_URL" && \
+    cd $BOT_DIR/MusicBot && \	
+    mv Dockerfile README.md bootstrap.py data logs requirements.txt run.py update.bat update.sh LICENSE bin config dockerentry.py musicbot run.bat run.sh update.py /$BOT_DIR && \
+	  cd $BOT_DIR && \
+	  rm -r -f MusicBot &&\
+	  chown -fR musicbot:musicbot "$BOT_DIR" && \
+	  rm -rf /tmp/* /var/tmp/*
+	
+USER musicbot
+WORKDIR "$BOT_DIR"
 
-ENV APP_ENV=docker
+VOLUME ["$BOT_DIR/config"]
 
 ENTRYPOINT ["python3", "dockerentry.py"]
