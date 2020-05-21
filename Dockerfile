@@ -7,7 +7,7 @@ ENV BOT_USER="3000" \
     BOT_DIR="/musicbot" \
     BOT_DL_URL="https://github.com/treewords/MusicBot.git"
 	
-RUN groupadd -g "$SINUS_GROUP" musicbot && \
+RUN groupadd -g "$BOT_GROUP" musicbot && \
     useradd -u "$BOT_USER" -g "$BOT_GROUP" -d "$BOT_DIR" musicbot
     	
 # Install build tools
