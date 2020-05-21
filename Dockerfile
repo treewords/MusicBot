@@ -5,7 +5,7 @@ LABEL maintainer="Gheonea Iulian <gheonea.iulian@gmail.com>"
 ENV BOT_USER="3000" \
     BOT_GROUP="3000" \
     BOT_DIR="/musicbot" \
-	BOT_DL_URL="https://github.com/treewords/MusicBot.git" \
+    BOT_DL_URL="https://github.com/treewords/MusicBot.git" \
 	
 RUN groupadd -g "$SINUS_GROUP" musicbot && \
     useradd -u "$BOT_USER" -g "$BOT_GROUP" -d "$BOT_DIR" musicbot && \	
@@ -24,10 +24,10 @@ RUN mkdir -p "$BOT_DIR" && \
     git clone "$SBOT_DL_URL" && \
     cd $BOT_DIR/MusicBot && \	
     mv Dockerfile README.md bootstrap.py data logs requirements.txt run.py update.bat update.sh LICENSE bin config dockerentry.py musicbot run.bat run.sh update.py /$BOT_DIR && \
-	  cd $BOT_DIR && \
-	  rm -r -f MusicBot &&\
-	  chown -fR musicbot:musicbot "$BOT_DIR" && \
-	  rm -rf /tmp/* /var/tmp/*
+    cd $BOT_DIR && \
+    rm -r -f MusicBot && \
+    chown -fR musicbot:musicbot "$BOT_DIR" && \
+    rm -rf /tmp/* /var/tmp/*
 	
 USER musicbot
 WORKDIR "$BOT_DIR"
