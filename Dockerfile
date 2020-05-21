@@ -18,7 +18,7 @@ RUN apt update -y \
 
 # Install system dependencies
 RUN apt-get update -y \
-    && apt-get install git \
+    && apt-get -y install git \
     ffmpeg \
     libopus-dev \
     libffi-dev \
