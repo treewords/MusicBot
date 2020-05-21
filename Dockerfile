@@ -26,7 +26,7 @@ RUN apt-get update -y \
     python3-pip
 	
 # Clone the MusicBot to your home directory
-RUN mkdir -p "$BOT_DIR" \
+RUN mkdir -p "$BOT_DIR" && \
     git clone "$BOT_DL_URL" -b master
     	
 USER musicbot
