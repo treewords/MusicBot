@@ -17,9 +17,13 @@ RUN apt update -y \
     software-properties-common
 
 # Install system dependencies
-RUN apt-get update -y && \
-    apt-get install git ffmpeg libopus-dev libffi-dev libsodium-dev python3-pip && \
-    apt-get -y upgrade
+RUN apt-get update -y \
+    && apt-get install git \
+    ffmpeg \
+    libopus-dev \
+    libffi-dev \
+    libsodium-dev \
+    python3-pip
 	
 # Clone the MusicBot to your home directory
 RUN mkdir -p "$BOT_DIR" && \
