@@ -27,14 +27,8 @@ RUN apt-get update -y \
 	
 # Clone the MusicBot to your home directory
 RUN mkdir -p "$BOT_DIR" \
-    && git clone "$BOT_DL_URL" -b master \
-    cd MusicBot \	
-    mv Dockerfile README.md bootstrap.py data logs requirements.txt run.py update.bat update.sh LICENSE bin config dockerentry.py musicbot run.bat run.sh update.py /$BOT_DIR \
-    cd $BOT_DIR \
-    rm -r -f MusicBot \
-    chown -fR musicbot:musicbot "$BOT_DIR" \
-    rm -rf /tmp/* /var/tmp/*
-	
+    git clone "$BOT_DL_URL" -b master
+    	
 USER musicbot
 WORKDIR "$BOT_DIR"
 
