@@ -11,14 +11,15 @@ RUN groupadd -g "$BOT_GROUP" musicbot && \
     useradd -u "$BOT_USER" -g "$BOT_GROUP" -d "$BOT_DIR" musicbot
     	
 # Install build tools
-RUN apt-get update -y \
-    apt-get install build-essential unzip -y \
-    apt-get install software-properties-common -y
+RUN apt update -y \
+    && apt -y install build-essential \
+    unzip \
+    software-properties-common
 
 # Install system dependencies
 RUN apt-get update -y && \
     apt-get install git ffmpeg libopus-dev libffi-dev libsodium-dev python3-pip && \
-    apt-get upgrade -y apt-get -q upgrade -y
+    apt-get -y upgrade
 	
 # Clone the MusicBot to your home directory
 RUN mkdir -p "$BOT_DIR" && \
