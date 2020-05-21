@@ -12,7 +12,7 @@ RUN groupadd -g "$BOT_GROUP" musicbot && \
     	
 # Install build tools
 RUN apt-get update -y \
-    && apt-get install build-essential unzip -y \
+    apt-get install build-essential unzip -y \
     apt-get install software-properties-common -y
 
 # Install system dependencies
