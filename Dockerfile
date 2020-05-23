@@ -32,15 +32,15 @@ RUN mkdir -p "$BOT_DIR" && \
 # Install Python dependencies
 RUN python3 -m pip install -U pip
 
-COPY "$BOT_DIR"/MusicBot/requirements.txt /requirements.txt
+COPY MusicBot/requirements.txt /requirements.txt
 
 RUN python3 -m pip install -U -r requirements.txt
 
 USER musicbot
 WORKDIR "$BOT_DIR/MusicBot"
 
-COPY "$BOT_DIR"/MusicBot/dockerentry.py /dockerentry.py
-COPY "$BOT_DIR"/MusicBot/run.py /run.py
+COPY MusicBot/dockerentry.py /dockerentry.py
+COPY MusicBot/run.py /run.py
 
 VOLUME ["$BOT_DIR/MusicBot/config"]
 
