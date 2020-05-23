@@ -32,7 +32,7 @@ RUN mkdir -p "$BOT_DIR" && \
 # Install Python dependencies
 RUN python3 -m pip install -U pip
 
-COPY MusicBot/requirements.txt /requirements.txt
+COPY "$BOT_DIR"/MusicBot/requirements.txt /requirements.txt
 
 RUN python3 -m pip install -U -r requirements.txt
 
