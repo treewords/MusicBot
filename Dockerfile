@@ -29,9 +29,17 @@ RUN apt-get update -y \
 RUN mkdir -p "$BOT_DIR" && \
     git clone "$BOT_DL_URL" -b master
     	
+# Install Python dependencies
+RUN python3 -m pip install -U pip
+
+COPY MusicBot/requirements.txt /requirements.txt
+
+RUN python3 -m pip install -U -r requirements.txt
+
 USER musicbot
-WORKDIR "$BOT_DIR"
+WORKDIR "$BOT_DIR/MusicBot"
 
-VOLUME ["$BOT_DIR/config"]
+VOLUME ["$BOT_DIR/MusicBot/config"]
 
-ENTRYPOINT ["python3", "dockerentry.py"]
+ENTRYPOINT ["python3", "/dockerentry.py"]
+
